@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (function() {
      function config($stateProvider, $locationProvider) {
 
@@ -33,3 +34,6 @@
          .module('blocJams', ['ui.router'])
          .config(config);
  })();
+=======
+angular.module('blocJams', []);
+>>>>>>> f1bb827... add nav tag into index.html
