@@ -1,5 +1,7 @@
 <section class="album-covers container clearfix">
-    <div class="collection-album-container column fourth" ng-repeat="album in collection.albums">
+    <div class="collection-album-container column fourth" ng-repeat="album in collection.albums track by $index">
+	<!--The default tracking function (which tracks items by their identity) does not allow duplicate items in arrays.
+	If you do need to repeat duplicate items, you can substitute the default tracking behavior with your own using the track by $index -->
         <img src="{{ album.albumArtUrl }}">
         <div class="collection-album-info caption">
             <p>
@@ -13,3 +15,5 @@
         </div>
     </div>
 </section>
+
+
