@@ -9,7 +9,6 @@
 					   ng-show="!playerBar.songPlayer.currentSong.playing"
 					   ng-click="playerBar.songPlayer.play()">
 				 </span>
-<!--				 Note: playerBar.songPlayer is the 'SongPlayer' service that is called from PlayerBarCtrl.js-->
 				 <span class="ion-pause"
 					   ng-show="playerBar.songPlayer.currentSong.playing"
 					   ng-click="playerBar.songPlayer.pause()">
@@ -21,16 +20,16 @@
              </a>
          </div>
          <div class="control-group currently-playing">
-             <h2 class="song-name"></h2>
+             <h2 class="song-name">{{playerBar.songPlayer.currentSong.name}}</h2>
              <h2 class="artist-song-mobile"></h2>
-             <h3 class="artist-name"></h3>
+             <h3 class="artist-name">{{playerBar.albumData.artist}}</h3>
              <div class="seek-control">
                  <div class="seek-bar">
                      <div class="fill"></div>
                      <div class="thumb"></div>
                  </div>
                  <div class="current-time"></div>
-                 <div class="total-time"></div>
+                 <div class="total-time">{{playerBar.songPlayer.currentSong.length}}</div>
              </div>
          </div>
          <div class="control-group volume">

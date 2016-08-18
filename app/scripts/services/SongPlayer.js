@@ -1,6 +1,9 @@
 (function () {
 	function SongPlayer(Fixtures) {
-		//Access songs from the Current Album
+		//Access songs from the Current Album locally
+		//we cannot call it to use outside of this function 
+		//if we want to use global we create:
+		//SongPlayer.currentAlbum = Fixtures.getAlbum();
 		var currentAlbum = Fixtures.getAlbum();
 		
 		//Then, we can get the index of a song arrays
@@ -15,7 +18,8 @@
      		return currentAlbum.songs.indexOf(song);
  		};
 		
-		
+		//We use SongPlayer as an array to store all functions such as SongPlayer.play()
+		//SongPlayer.pause(), and so on.
 		var SongPlayer = {};
 		
 		/**
@@ -41,7 +45,7 @@
 				formats: ['mp3'],
 				preload: true
 			});
-
+			//important where we assign song for use currently
 			SongPlayer.currentSong = song;
  		};
 		
@@ -117,6 +121,26 @@
          		playSong(song);
      		}
 			
+			
+		};
+		
+		SongPlayer.next = function() {
+			var currentSongIndex= getSongIndex(SongPlayer.currentSong);
+			currentSongIndex++;
+			
+			if(currentSongIndex >= currentAlbum.songs.length ){
+			currentSongIndex=0;
+			}
+				
+         	var song = currentAlbum.songs[currentSongIndex];
+         	setSong(song);
+         	playSong(song);
+     		
+		};
+		
+		var stopSong = function () {
+			currentBuzzObject.stop();
+			song.playing = null;
 			
 		};
 		
