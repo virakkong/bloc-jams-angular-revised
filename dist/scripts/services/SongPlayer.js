@@ -31,6 +31,11 @@
  		};
 		
 		//play
+		
+		/** @function SongPlayer.play(song)
+		 * @desc If the currently playing song is not the same as the user click==> setSong 	and play, and change playing boolean status to true;
+		 * @param {Object} song
+		 */
 		SongPlayer.play = function (song) {
 
 			//If the currently playing song is not the same as the song the user clicks on
@@ -54,12 +59,26 @@
 		};
 		
 		//Pause
-		
+		/**
+		 * @function SongPlayer.pause(song)
+		 * @desc Stops currently playing song and set the playing boolean to false 
+		*/
 		SongPlayer.pause =function(song){
 			currentBuzzObject.pause();
 			song.playing =false;
 		};
 		
+		/**
+		 * @function SongPlayer.playSong(song)
+		 * @desc play currently playing song and set the playing boolean to true; 
+		*/
+		
+		SongPlayer.playSong = function(song){
+			
+			currentBuzzObject.play();
+			song.playing =true;
+			
+		};
 
 
 		return SongPlayer;
