@@ -8,13 +8,14 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 
-	'gh-pages': {
-    		options: {
-     		base: 'build',
-      		repo: 'https://github.com/virakkong/bloc-jams-angular-revised.git'
-    		},
-   	 src: '**/*'
+	git_deploy: {
+    your_target: {
+      options: {
+        url: 'https://github.com/virakkong/test.git'
+      },
+      src: 'dist'
     },
+  },
 
         watch: {
             hapi: {
@@ -85,7 +86,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-hapi');
-    grunt.loadNpmTasks('grunt-gh-pages');
+ 
     
 
 };
