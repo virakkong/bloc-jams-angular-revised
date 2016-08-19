@@ -7,6 +7,20 @@ module.exports = function(grunt) {
     grunt.registerTask( 'run', [ 'hapi', 'watch' ]);
 
     grunt.initConfig({
+	deploy_site: {
+        	produciton: {
+
+            		options: {
+
+                		branch: 'gh-pages',
+                		commit_msg: 'deployment',
+                		deploy_url: 'http://angular.github.io'
+            		},
+
+            		base_path: 'dist',
+            		remote_url: 'https://github.com/virakkong/angular.git'
+       		 }
+   	 }
 
         watch: {
             hapi: {
