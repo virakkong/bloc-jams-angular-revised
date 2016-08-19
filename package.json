@@ -26,6 +26,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-deploy-site": "^0.1.2",
     "grunt-gh-pages": "^2.0.0",
+    "grunt-git-deploy": "^0.3.1",
     "grunt-hapi": "^0.8.1"
   }
 }
