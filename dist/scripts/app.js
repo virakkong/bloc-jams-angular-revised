@@ -26,7 +26,7 @@
              templateUrl: '/templates/collection.html'
          });
 
-     }
+     };
  
  
      angular

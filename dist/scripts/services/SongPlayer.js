@@ -1,5 +1,8 @@
 (function () {
-	function SongPlayer(Fixtures) {
+	
+	//Every Angular application has just one $rootScope, from which all other scopes inherit. So, any Angular component can access $rootScope variables, events, and functions.
+	//Because $rootScope is a service, we must inject it as a dependency before we can use it:
+	function SongPlayer($rootScope,Fixtures) {
 		//Access songs from the Current Album locally
 		//we cannot call it to use outside of this function 
 		//if we want to use global we create:
@@ -45,12 +48,32 @@
 				formats: ['mp3'],
 				preload: true
 			});
+			
+			/*timeupdate is our first custom event
+			Add the $apply to the SongPlayer.setSong method so that it starts "applying" the time update once we know which song to play
+			
+			The bind() method adds an event listener to the Buzz sound object 
+			*/
+			currentBuzzObject.bind('timeupdate', function(){
+				$rootScope.$apply(function(){
+					SongPlayer.currentTime = currentBuzzObject.getTime();
+				});
+			});
 			//important where we assign song for use currently
 			SongPlayer.currentSong = song;
  		};
 		
 	
 		SongPlayer.currentSong = null;
+		
+		/**
+		* @desc Current Playerback time (in seconds) of currently playing song
+		* @type {number}
+		
+		*/
+		SongPlayer.currentTime =null;
+		
+		SongPlayer.volume = 80;
 		
 		/** @function SongPlayer.play(song)
 		 * @desc If the currently playing song is not the same as the user click==> setSong 	and play, and change playing boolean status to true;
@@ -100,7 +123,7 @@
 		var playSong = function(song){
 			
 			currentBuzzObject.play();
-			song.playing =true;
+			song.playing = true;
 			
 		};
 		
@@ -127,14 +150,18 @@
 		SongPlayer.next = function() {
 			var currentSongIndex= getSongIndex(SongPlayer.currentSong);
 			currentSongIndex++;
+			var lastSongIndex = currentAlbum.songs.length -1;
 			
-			if(currentSongIndex >= currentAlbum.songs.length ){
-			currentSongIndex=0;
-			}
+			if(currentSongIndex > lastSongIndex ){
+			stopSong(SongPlayer.currentSong);
+			
+			
+			} 
 				
          	var song = currentAlbum.songs[currentSongIndex];
          	setSong(song);
          	playSong(song);
+			
      		
 		};
 		
@@ -144,7 +171,23 @@
 			
 		};
 		
+		/**
+			 * @function setCurrentTime
+			 * @desc Set current time (in seconds) of currently playing song
+			 * @param {Number} time
+		*/
+		SongPlayer.setCurrentTime = function(time) {
+			 if (currentBuzzObject) {
+				 currentBuzzObject.setTime(time);
+			 }
+		};
 		
+		SongPlayer.setVolume = function(volume){
+			if(currentBuzzObject){
+				currentBuzzObject.setVolume(volume);
+			}
+			SongPlayer.volume=volume;
+		}
 
 
 		return SongPlayer;
@@ -152,7 +195,7 @@
 
 	angular
 		.module('blocJams')
-		.factory('SongPlayer', SongPlayer);
+		.factory('SongPlayer',['$rootScope','Fixtures', SongPlayer]);
 
 
 
